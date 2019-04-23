@@ -3,7 +3,6 @@
 #include <math.h>
 #include <stdio.h>
 #include <string.h>
-#include <sstream>
 
 using namespace std;
 
@@ -11,8 +10,8 @@ using namespace std;
 float p1x = 0, p1y = 0.05, p1z = 1;
 float scale = 0.05;
 
-int pontuacao = 0;
-char message[] = "Score: ";
+float pontuacao = 0;
+char message[] = "Score:";
 
 
 GLfloat xf = 50, yf = 50, win = 250;
@@ -320,27 +319,29 @@ float pontos[][3] = { // LADO DIREITO
 
 void display()
 {
-    glLineWidth(2.0);
+  //glClearColor(0.0, 0.0, 0.3, 1.0);
+  glClear(GL_COLOR_BUFFER_BIT);
+  //glColor3f(1.0, 1.0, 1.0);
+  glLineWidth(2.0);
 
-    //glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluOrtho2D(0, 3000, 0, 3500);
 
-    glPushMatrix();
-    glTranslatef(050,2100,0); //Translates the character object with its axis of rotation
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  gluOrtho2D(0, 3000, 0, 3500);
 
-    string stx = "";
-    stringstream cvstr;
-    cvstr << "Score:";
-    cvstr << pontuacao;
-    stx = cvstr.str().c_str();
-    strcpy(message,stx.c_str());
+  glPushMatrix();
+  glTranslatef(050,2100,0); //Translates the character object with its axis of rotation
+  //glTranslatef(-700,0,0); //translates the character object
+                        //by 700 unit to the -ve x-axis
+  for (unsigned int i = 0; i < strlen(message); i++) {
+    glutStrokeCharacter(GLUT_STROKE_ROMAN, message[i]);
+  }
 
-    for (int i = 0; i < strlen(message); i++) {
-        glutStrokeCharacter(GLUT_STROKE_ROMAN, message[i]);
-    }
+    glutStrokeCharacter(GLUT_STROKE_ROMAN, (pontuacao + '0'));
 
-    glPopMatrix();
+
+  glPopMatrix();
+  //glutSwapBuffers();
 }
 
 void desenhaPlayer(){
@@ -370,11 +371,13 @@ void desenha(){
     glClearColor(0.0, 0.0, 0.0, 0.0);
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(1.0,1.0,1.0);
+    //exibe texto
+    display();
     // Player
     desenhaPlayer();
 
     // Barras
-    for(int i=0; i < sizeof(parede)/sizeof(parede[0]); i++){
+    for(unsigned int i=0; i < sizeof(parede)/sizeof(parede[0]); i++){
         glLoadIdentity();
         glColor3f(0.35,0.35,1.0);
         glTranslatef(parede[i][0], parede[i][1], 0);
@@ -384,7 +387,7 @@ void desenha(){
     }
 
     // Pontos
-    for(int i=0; i < sizeof(pontos)/sizeof(pontos[0]); i++){
+    for(unsigned int i=0; i < sizeof(pontos)/sizeof(pontos[0]); i++){
         if (pontos[i][2] == 1){
             glLoadIdentity();
             glColor3f(1.0,1.0,1.0);
@@ -393,14 +396,12 @@ void desenha(){
             glutSolidSphere(0.2, 10, 10);
         }
     }
-    //exibe texto
-    display();
 
     glFlush();
 }
 
 void ePonto(){
-    for(int i=0; i < sizeof(pontos)/sizeof(pontos[0]); i++){
+    for(unsigned int i=0; i < sizeof(pontos)/sizeof(pontos[0]); i++){
         float dx = pontos[i][0] - p1x;
         float dy = pontos[i][1] - p1y;
         float distance = sqrt(dx*dx + dy*dy);
@@ -414,7 +415,7 @@ void ePonto(){
 }
 
 bool eParede(float x, float y){
-    for(int i=0; i < sizeof(parede)/sizeof(parede[0]); i++){
+    for(unsigned int i=0; i < sizeof(parede)/sizeof(parede[0]); i++){
         if (((  x <= parede[i][0]+(parede[i][2]/40)) && (  x >= parede[i][0]-(parede[i][2]/40))) &&
             ((  y <= parede[i][1]+(parede[i][3]/40)) && (  y >= parede[i][1]-(parede[i][3]/40))))
             return true;

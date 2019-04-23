@@ -1,0 +1,94 @@
+# depslib dependency file v1.0
+1552439738 source:c:\users\user_le10_39\desktop\opengl\main.cpp
+	<iostream>
+	<GL/freeglut.h>
+
+1551228550 c:\users\user_le10_39\desktop\opengl\freeglut\include\gl\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1551228550 c:\users\user_le10_39\desktop\opengl\freeglut\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1551228550 c:\users\user_le10_39\desktop\opengl\freeglut\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1553645615 source:c:\users\user_le10_39\downloads\opengl - aula 2-20190326t222949z-001\opengl - aula 2\main.cpp
+	<iostream>
+	<GL/freeglut.h>
+
+1553639403 c:\users\user_le10_39\downloads\opengl - aula 2-20190326t222949z-001\opengl - aula 2\freeglut\include\gl\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1553639403 c:\users\user_le10_39\downloads\opengl - aula 2-20190326t222949z-001\opengl - aula 2\freeglut\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1553639403 c:\users\user_le10_39\downloads\opengl - aula 2-20190326t222949z-001\opengl - aula 2\freeglut\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1555274945 source:c:\users\igord\documents\opengl\main.cpp
+	<GL/freeglut.h>
+	<iostream>
+	<math.h>
+	<bits/stdc++.h>
+
+1553634934 c:\users\igord\documents\opengl\freeglut\include\gl\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1553634934 c:\users\igord\documents\opengl\freeglut\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1553634936 c:\users\igord\documents\opengl\freeglut\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1555431111 source:c:\users\igord\documents\pacman\main.cpp
+	<GL/freeglut.h>
+	<iostream>
+	<math.h>
+	<stdio.h>
+	<string.h>
+
+1553634934 c:\users\igord\documents\pacman\freeglut\include\gl\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1553634934 c:\users\igord\documents\pacman\freeglut\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1553634936 c:\users\igord\documents\pacman\freeglut\include\gl\freeglut_ext.h
+	<stdarg.h>
+
