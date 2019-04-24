@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/OpenGL" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/Pacman" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -17,14 +17,15 @@
 				</Compiler>
 				<Linker>
 					<Add library="freeglut/lib/libfreeglut.a" />
-					<Add library="freeglut/lib/x64/libfreeglut.a" />
 					<Add library="../../../../Program Files (x86)/CodeBlocks/MinGW/lib/libopengl32.a" />
+					<Add library="freeglut/lib/x64/libfreeglut.a" />
+					<Add library="freeglut/lib/libfreeglut_static.a" />
 					<Add library="../../../../Program Files (x86)/CodeBlocks/MinGW/lib/libglu32.a" />
 					<Add directory="freeglut/lib" />
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/OpenGL" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/Pacman" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
