@@ -17,10 +17,10 @@
 				</Compiler>
 				<Linker>
 					<Add library="freeglut/lib/libfreeglut.a" />
-					<Add library="../../../../Program Files (x86)/CodeBlocks/MinGW/lib/libopengl32.a" />
+					<Add library="freeglut/libglu32.a" />
 					<Add library="freeglut/lib/x64/libfreeglut.a" />
 					<Add library="freeglut/lib/libfreeglut_static.a" />
-					<Add library="../../../../Program Files (x86)/CodeBlocks/MinGW/lib/libglu32.a" />
+					<Add library="freeglut/libopengl32.a" />
 					<Add directory="freeglut/lib" />
 				</Linker>
 			</Target>
@@ -41,6 +41,8 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="LoadTexture/loadTexture.cpp" />
+		<Unit filename="LoadTexture/loadTexture.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

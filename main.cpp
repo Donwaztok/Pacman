@@ -4,21 +4,24 @@
 #include <stdio.h>
 #include <string.h>
 #include <sstream>
+#include "LoadTexture/loadTexture.h"
 
 using namespace std;
 
+GLuint textura[3];
+// mapeamento dos vértices da esfera.
+GLUquadric *quad = gluNewQuadric();
 
 float p1x = 0, p1y = 0.05, p1z = 1;
 float scale = 0.05;
 
+float angulo = 0;
+
 int pontuacao = 0;
 char message[] = "Score: ";
 
-
 GLfloat xf = 50, yf = 50, win = 250;
 GLint view_w, view_h;
-
-
 
                     /*     x        y       h      w */
 float parede[][4] = {{     1,       1,      1,    35},
@@ -316,41 +319,37 @@ float pontos[][3] = { // LADO DIREITO
                     };
 
 
-
-
-void display()
-{
+void display(){
     glLineWidth(2.0);
 
-    //glMatrixMode(GL_PROJECTION);
     glLoadIdentity();
     gluOrtho2D(0, 3000, 0, 3500);
 
     glPushMatrix();
     glTranslatef(050,2100,0); //Translates the character object with its axis of rotation
 
-    string stx = "";
     stringstream cvstr;
-    cvstr << "Score:";
-    cvstr << pontuacao;
-    stx = cvstr.str().c_str();
+    cvstr << "Score:" << pontuacao;
+    string stx = cvstr.str().c_str();
     strcpy(message,stx.c_str());
 
     for (int i = 0; i < strlen(message); i++) {
         glutStrokeCharacter(GLUT_STROKE_ROMAN, message[i]);
     }
-
     glPopMatrix();
 }
 
 void desenhaPlayer(){
     // Player
+    glEnable(GL_DEPTH_TEST);
+    glBindTexture(GL_TEXTURE_2D, textura[0]);
     glLoadIdentity();
-    glColor3f(1.0,1.0,0.0);
     glTranslatef(p1x, p1y, p1z);
     glScalef(scale,scale,scale);
-    glutSolidSphere(1, 10, 10);
-
+    glRotatef(angulo, 0.0, 1.0, 0.0);
+    gluQuadricTexture(quad, true);
+    gluQuadricDrawStyle(quad, GL_FILL);
+    gluSphere(quad, 1, 10, 10);
     // Pontos de colisão
     /*int qtdCalculos = 12;
     for (int i=0; i < qtdCalculos; i++){
@@ -365,34 +364,55 @@ void desenhaPlayer(){
     }*/
 }
 
+void desenhaBloco(float parede[4]){
+    glBindTexture(GL_TEXTURE_2D, textura[1]);
+    glLoadIdentity();
+    glTranslatef(parede[0], parede[1], 0);
+    glScalef(scale,scale,scale);
+    glScalef(parede[2], parede[3], 1);
+
+    glBegin(GL_QUADS);
+        glTexCoord2f(0.0,0.0);    // coordenado s, t da textura.
+        glVertex2f(-0.5, -0.5);  // coordenada do mundo
+        glTexCoord2f(0.0, 1.0);
+        glVertex2f(-0.5,  0.5);
+        glTexCoord2f(1.0, 1.0);
+        glVertex2f(0.5, 0.5);
+        glTexCoord2f(1.0, 0.0);
+        glVertex2f(0.5, -0.5);
+    glEnd();
+}
+
+void desenhaPonto(float pontos[2]){
+    if (pontos[2] == 1){
+        glEnable(GL_DEPTH_TEST);
+        glBindTexture(GL_TEXTURE_2D, textura[2]);
+        glLoadIdentity();
+        glTranslatef(pontos[0], pontos[1], 0);
+        glScalef(scale,scale,scale);
+        gluQuadricTexture(quad, true);
+        gluQuadricDrawStyle(quad, GL_FILL);
+        gluSphere(quad, 0.2, 10, 10);
+    }
+}
+
 // Desenha
 void desenha(){
-    glClearColor(0.0, 0.0, 0.0, 0.0);
-    glClear(GL_COLOR_BUFFER_BIT);
+    glClearColor(0.0, 0.0, 0.0, 1.0);
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    glEnable(GL_TEXTURE_2D);   // Habilita a textura.
     glColor3f(1.0,1.0,1.0);
     // Player
     desenhaPlayer();
-
     // Barras
     for(int i=0; i < sizeof(parede)/sizeof(parede[0]); i++){
-        glLoadIdentity();
-        glColor3f(0.35,0.35,1.0);
-        glTranslatef(parede[i][0], parede[i][1], 0);
-        glScalef(scale,scale,scale);
-        glScalef(parede[i][2], parede[i][3], 1);
-        glutSolidCube(1);
+            desenhaBloco(parede[i]);
     }
-
     // Pontos
     for(int i=0; i < sizeof(pontos)/sizeof(pontos[0]); i++){
-        if (pontos[i][2] == 1){
-            glLoadIdentity();
-            glColor3f(1.0,1.0,1.0);
-            glTranslatef(pontos[i][0], pontos[i][1], 0);
-            glScalef(scale,scale,scale);
-            glutSolidSphere(0.2, 10, 10);
-        }
+            desenhaPonto(pontos[i]);
     }
+    glDisable(GL_TEXTURE_2D); // Desabilita Textura 2D
     //exibe texto
     display();
 
@@ -466,6 +486,7 @@ void tecladoEspecial(int key, int x, int y){
 void timer(int p){
     glutPostRedisplay();                // Redesenha a Tela
     glutTimerFunc(10, timer, 0);        // Agenda a Funcao Timer para 30 ms
+    angulo += 1;
 }
 
 int main(int argc, char * argv[]){
@@ -475,6 +496,11 @@ int main(int argc, char * argv[]){
     glutCreateWindow("Pac-Man");
     glutDisplayFunc(desenha);
     glutTimerFunc(0, timer, 0);         // Chama Timer após 0 ms
+
+    textura[0] = LoadBitmap("Textures/pacman.bmp");
+    textura[1] = LoadBitmap("Textures/wall.bmp");
+    textura[2] = LoadBitmap("Textures/point.bmp");
+
     //glutMouseFunc(mouse);
     glutKeyboardFunc(teclado);
     glutSpecialFunc(tecladoEspecial);

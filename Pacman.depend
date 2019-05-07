@@ -25,3 +25,41 @@
 1426360528 c:\users\igord\desktop\pacman\freeglut\include\gl\freeglut_ext.h
 	<stdarg.h>
 
+1557271337 source:c:\users\user_le10_39\documents\pacman-master\main.cpp
+	<GL/freeglut.h>
+	<iostream>
+	<math.h>
+	<stdio.h>
+	<string.h>
+	<sstream>
+	"LoadTexture/loadTexture.h"
+
+1557268008 c:\users\user_le10_39\documents\pacman-master\freeglut\include\gl\freeglut.h
+	"freeglut_std.h"
+	"freeglut_ext.h"
+
+1557268008 c:\users\user_le10_39\documents\pacman-master\freeglut\include\gl\freeglut_std.h
+	<windows.h>
+	<EGL/egl.h>
+	<GLES/gl.h>
+	<GLES2/gl2.h>
+	<OpenGL/gl.h>
+	<OpenGL/glu.h>
+	<GL/gl.h>
+	<GL/glu.h>
+	<stdlib.h>
+
+1557268008 c:\users\user_le10_39\documents\pacman-master\freeglut\include\gl\freeglut_ext.h
+	<stdarg.h>
+
+1557268217 source:c:\users\user_le10_39\documents\pacman-master\loadtexture\loadtexture.cpp
+	"loadTexture.h"
+
+1557268217 c:\users\user_le10_39\documents\pacman-master\loadtexture\loadtexture.h
+	<GL/glut.h>
+	<cstdlib>
+	<cstdio>
+
+1557268008 c:\users\user_le10_39\documents\pacman-master\freeglut\include\gl\glut.h
+	"freeglut_std.h"
+
